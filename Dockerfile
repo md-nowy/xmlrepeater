@@ -10,4 +10,4 @@ ENV tag=""
 # iteration times 
 ENV i=""
 
-CMD [ "bash", "-c", "/app/repeater.sh < ${fie} ${tag} ${i}" ]
+CMD [ "bash", "-c", "/app/repeater.sh < ${file} ${tag} ${i}" ]
