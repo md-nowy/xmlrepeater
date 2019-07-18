@@ -52,8 +52,8 @@ for (( i=0; i<$2; i++)); do
 done
 
 # Write all parts of the document to file
-declare filename="$(pwd)/document.xml"
-printf "Document is saved to:\n${filename}"
+declare filename="/root/document.xml"
+printf "Document is saved to:\n${filename}\n"
 printf "${partBefore}" > $filename
 printf "${partDoneRepeating}" >> $filename
 printf "${partAfter}" >> $filename
