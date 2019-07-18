@@ -4,11 +4,13 @@
 # Repeat part of the xml document by specified tag for provided number of times
 
 # Check if any argument was provided
-[[ $1 ]] || { echo "provide an string as an argument" >&2; exit 1; }
+[[ $1 ]] || { echo "Provide a tag or part which encloses item of an array" >&2; exit 1; }
+[[ $2 ]] || { echo "Provide a number of iterations" >&2; exit 1; }
 
 # Declare variables for splited up xml document parts
 declare partBefore=""
 declare partToRepeat=""
+declare partDoneRepeating=""
 declare partAfter=""
 
 # Read up to fist match of specified tag
@@ -45,16 +47,15 @@ while read -r || [[ $REPLY ]]; do
 done
 
 # Repeat items for specified number of times
-declare partDoneRepeating=""
-for (( i=0; i<3; i++)); do
+for (( i=0; i<$2; i++)); do
     partDoneRepeating+=$partToRepeat
 done
 
-# put together begining + intereated intersection + end
-printf "#################\n"
-printf "${partBefore}"
-printf "${partDoneRepeating}"
-printf "${partAfter}"
-# write it to specified location? or maybe do that in Dockerfile?
+# Write all parts of the document to file
+declare filename="$(pwd)/document.xml"
+printf "Document is saved to:\n${filename}"
+printf "${partBefore}" > $filename
+printf "${partDoneRepeating}" >> $filename
+printf "${partAfter}" >> $filename
 
 exit 0
